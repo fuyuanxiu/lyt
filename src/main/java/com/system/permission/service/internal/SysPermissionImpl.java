@@ -1,9 +1,20 @@
 package com.system.permission.service.internal;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.CallableStatementCallback;
+import org.springframework.jdbc.core.CallableStatementCreator;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +39,9 @@ public class SysPermissionImpl implements SysPermissionService {
 
     @Autowired
     private SysPermissionDao sysPermissionDao;
+    
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public List<SysPermission> permList() {
@@ -96,6 +110,60 @@ public class SysPermissionImpl implements SysPermissionService {
 		// TODO Auto-generated method stub
 		return ApiResponseResult.success().data(sysPermissionDao.getUserPerms(id));
 	}
+
+	@Override
+	public ApiResponseResult getUserPermsByPrc(String fcode) throws Exception {
+		// TODO Auto-generated method stub
+		//获取数据
+        List<Object> list = getUserPermsByPrcRf(fcode);
+        String f = list.get(0).toString();
+        if(!f.equals("True")){
+        	return ApiResponseResult.failure();
+        }
+		return ApiResponseResult.success().data(list.get(1));
+	}
+	//执行存储获取数据1
+    public List<Object> getUserPermsByPrcRf(String fcode) {
+        List<Object> resultList = (List<Object>) jdbcTemplate.execute(new CallableStatementCreator() {
+            @Override
+            public CallableStatement createCallableStatement(Connection con) throws SQLException {
+                String storedProc = "{call PRC_APP_GETPOWER(?,?,?)}";// 调用的sql
+                CallableStatement cs = con.prepareCall(storedProc);
+                cs.setString(1, fcode);
+                cs.registerOutParameter(2,java.sql.Types.VARCHAR);// 注册输出参数 返回类型
+                cs.registerOutParameter(3,-10);// 注册输出参数 返回类型
+                return cs;
+            }
+        }, new CallableStatementCallback() {
+            public Object doInCallableStatement(CallableStatement cs) throws SQLException, DataAccessException {
+                List<Object> result = new ArrayList<Object>();
+                cs.execute();
+                result.add(cs.getString(2));
+
+                String str = cs.getString(2);
+                //判断取值是否成功
+                if(str.equals("True")){
+                    //游标处理
+                    ResultSet rs = (ResultSet)cs.getObject(3);
+                    List l = new ArrayList();
+
+                    while(rs.next()){
+                        Map m = new HashMap();
+                        m.put("ID", rs.getString("SID"));
+                        m.put("PID", rs.getString("FID"));
+                        m.put("FORDER", rs.getString("FORDER"));
+                        m.put("BS_CODE", rs.getString("SID"));
+                        m.put("BS_NAME", rs.getString("FCAPTION"));
+                        l.add(m);
+                    }
+                    result.add(l);
+                }
+
+                return result;
+            }
+        });
+        return resultList;
+    }
     
 	
     

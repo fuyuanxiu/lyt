@@ -20,4 +20,6 @@ public interface SysPermissionService {
 	public ApiResponseResult savePerm(SysPermission permission) throws Exception;
 	
 	public ApiResponseResult getUserPerms(Long id) throws Exception;
+	
+	public ApiResponseResult getUserPermsByPrc(String fcode) throws Exception;
 }

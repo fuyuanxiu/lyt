@@ -12,7 +12,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(WdApplication.class);
+		return application.sources(LytApplication.class);
 	}
 
 }

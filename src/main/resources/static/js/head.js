@@ -16,8 +16,9 @@ $(function(){
     layui.use('element', function(){
         var element = layui.element;
         // 左侧导航区域（可配合layui已有的垂直导航）
-        $.get(context+"/sysPermission/getUserPerms",function(data){
+        $.get(context+"/sysPermission/getUserPermsByPrc",function(data){
             if(data.result){
+            	console.log(data.data)
                 getMenus(data.data);
                 element.render('nav');
             }else{
@@ -47,7 +48,7 @@ var getMenus=function(data){
     for(var i=0;i < data.length;i++){
          
         var node=data[i];
-        if( node.ISTYPE==0){
+        if(true){
             if(node.PID==0){
                  
                 var li=$("<li data-name='"+node.BS_CODE+"'class='layui-nav-item' ></li>");

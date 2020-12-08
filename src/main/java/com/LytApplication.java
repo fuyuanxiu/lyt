@@ -15,16 +15,16 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @EnableScheduling
 @SpringBootApplication
-public class WdApplication  extends SpringBootServletInitializer{
+public class LytApplication  extends SpringBootServletInitializer{
 	
 
 	public static void main(String[] args) {
-		SpringApplication.run(WdApplication.class, args);
+		SpringApplication.run(LytApplication.class, args);
 	}
 	
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(WdApplication.class);
+        return application.sources(LytApplication.class);
     }
 
 //	@Bean

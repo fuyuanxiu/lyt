@@ -149,4 +149,28 @@ public class SysPermissionController extends WebController {
 		}
 	}
 	
+	/**
+	 * 根据用户账号查询权限树数据
+	 * @return List<Map<String, Object>>
+	 */
+	@RequestMapping(value = "/getUserPermsByPrc", method = RequestMethod.GET)
+	@ResponseBody
+	public ApiResponseResult getUserPermsByPrc() {
+		String method = "/sysPermission/getUserPermsByPrc";String methodName ="查询用户的权限";
+		logger.debug("根据用户账号查询限树列表！");
+		SysUser existUser= (SysUser) SecurityUtils.getSubject().getPrincipal();
+		if(null==existUser){
+			logger.debug(methodName+"用户未登录");
+			getSysLogService().error(method,methodName,"查询用户权限失败,用户未登录");
+			return ApiResponseResult.failure("用户未登录");
+		}
+		try {
+            return sysPermissionService.getUserPermsByPrc(existUser.getFcode());
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(methodName+"查询异常！", e);
+			return ApiResponseResult.failure(methodName+"查询异常");
+		}
+	}
+	
 }
