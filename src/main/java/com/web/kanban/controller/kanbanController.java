@@ -46,5 +46,23 @@ public class kanbanController extends WebController {
 		mav.setViewName("/kanban/demo");//返回路径
 		return mav;
 	}
-    
+	
+	@RequestMapping(value = "/toIndex", method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView toIndex() {
+		String method = "/kanban/toIndex";
+		String methodName ="生产车间看板";
+		ModelAndView mav=new ModelAndView();
+		try {	
+			ApiResponseResult dataType1 =kanbanService.getKanbanData("1","","1");
+			ApiResponseResult dataType2 =kanbanService.getKanbanData("1","","2");
+			mav.addObject("dataType1",dataType1);
+			mav.addObject("dataType2",dataType2);
+			mav.setViewName("/kanban/index");//返回路径
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("获取生产车间看板异常！", e);
+		}	
+		return mav;
+	}   
 }

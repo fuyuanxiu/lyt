@@ -103,7 +103,12 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/fragments/*", "anon");
 		filterChainDefinitionMap.put("/layout", "anon");
 		
+		filterChainDefinitionMap.put("/kanban/*", "anon");
+		filterChainDefinitionMap.put("/kanban/*/**", "anon");
+		filterChainDefinitionMap.put("/kanban/*/*/**", "anon");
+		
 		filterChainDefinitionMap.put("/kanban/toDemo", "anon");//看板demo
+		filterChainDefinitionMap.put("/kanban/toIndex", "anon");//看板
 
 		filterChainDefinitionMap.put("/user/sendMsg", "anon");
 		filterChainDefinitionMap.put("/user/login", "anon");

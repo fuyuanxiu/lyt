@@ -1,9 +1,44 @@
+
+var dataList = dataType2.data//原始数据
+dataList=dataList[2]
+console.log(dataList)
+
+var nameList=[];
+var valueList=[];
+
+if(dataList.length==0){//无数据时显示整圆
+	nameList.push('None:0');
+	valueList.push({
+		value:0,
+		name:'None:0',
+		itemStyle:{
+			normal:{
+				color:'rgb(0,100,0)'
+			}
+		}
+	})
+}else{
+	$.each(dataList,function (i, item) {
+		nameList.push(item.DEFECT_NAME)
+		var arr={}
+		arr['value']=item.DEFCODE_QTY
+		arr['name']=item.DEFECT_NAME;
+
+		valueList.push(arr)
+	})
+}
+
+
+	
+
+
+
+
 var dom = document.getElementById("box4");
 var myChart = echarts.init(dom);
 var app = {};
 option = null;
 option = {
-
 	    tooltip: {
 	        trigger: 'item',
 	        formatter: '{a} <br/>{b} : {c} ({d}%)'
@@ -14,7 +49,7 @@ option = {
 	        right: 90,
 	        top: 20,
 	        bottom: 20,
-	        data: ['test1', 'test2', 'test3', 'test4', 'test5'],
+	        data: nameList,
 	        textStyle:{//图例文字的样式
                 color:'#dbdbdb',
                 fontSize:14
@@ -26,13 +61,7 @@ option = {
 	            radius: '65%',
 	            center: ['50%', '50%'],
 	            selectedMode: 'single',
-	            data: [
-	                {value: 1548, name: 'test1'},
-	                {value: 535, name: 'test2'},
-	                {value: 510, name: 'test3'},
-	                {value: 634, name: 'test4'},
-	                {value: 735, name: 'test5'}
-	            ],
+	            data: valueList,
 	            emphasis: {
 	                itemStyle: {
 	                    shadowBlur: 10,
