@@ -219,7 +219,7 @@ function box2(){
 function box4(){
 	var dataList = dataType2.data//原始数据
 	dataList=dataList[2]
-
+	
 	var nameList=[];
 	var valueList=[];
 	var countList=[];
@@ -271,6 +271,9 @@ function box4(){
                    var index = 0;
                    var clientlabels = nameList;
                    var clientcounts = countList;
+                   if(dataList==0){
+                	   return 'None:0'
+                   }
                    clientlabels.forEach(function(value,i){
                        if(value == name){
                            index = i;
