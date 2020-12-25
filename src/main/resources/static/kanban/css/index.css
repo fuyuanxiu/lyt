@@ -9,14 +9,26 @@ header{width:1900px; height: 83px; line-height: 83px; color: #FFFFFF; font-size:
 .top-mid{height:100%;height: 83px;line-height: 83px;text-align:center;float:left;width:56%;background: url(../images/bg_title.png) no-repeat; margin: 0 auto; background-size: 100% 100%;text-align: center;}
 .top-right{height:100%;height: 83px;line-height: 83px;float:right;width:24%;font-size: 20px;}
 
+/*2020-12-23新增 右上角时间字段显示样式-start*/
+.head{ height:1.05rem;background-size: 100% 100%; position: relative; z-index: 100;}
+.weather{ position:absolute; right:.9rem; top:0; line-height: .75rem;}
+.time{color:#999999;font-size:16px;}
+/*2020-12-23新增-end*/
+
 .container{width: 1900px;}
 .col-lg-3,.col-lg-6{padding: 0; margin: 0;}
 .m-20{margin-top: 20px;}
 .title{width: 100%; height: 60px; font-size: 20px; color: #ff9000; line-height: 60px; padding-left: 20px; background: url(../images/title_icon.png) left center no-repeat; float: left;}
-.box1{width: 1880px; height: 400px; padding: 0 0 25px 25px; background: url(../images/bg_box1.png) no-repeat;background-size: 100% 100%; }
-.box1_con{width: 1880px; height: 340px; float: left;}
-.box2{width: 930px; height: 470px; padding: 0 0 25px 25px; background: url(../images/bg_box2.png) no-repeat; background-size: 100% 100%;float: left;}
-.box2_con{width: 930px; height: 433px; float: left;}
+.box1{width: 1880px; height: 530px; padding: 0 0 25px 25px; background: url(../images/bg_box1.png) no-repeat;background-size: 100% 100%; }
+.box1_con{width: 1880px; height: 470px; float: left;}
+.box2{width: 1060px; height: 340px; padding: 0 0 25px 25px; background: url(../images/bg_box2.png) no-repeat; background-size: 100% 100%;float: left;}
+.box2_con{width: 1060px; height: 290px; float: left;}
+
+/*2020-12-23新增-start*/
+.box2_r{width: 800px; height: 340px; padding: 0 0 25px 25px; background: url(../images/bg_box2.png) no-repeat; background-size: 100% 100%;float: left;}
+.box2_con_r{width: 800px; height: 290px; float: left;}
+/*2020-12-23新增-end*/
+
 .box3{width: 930px; height: 470px; padding: 0 25px 25px 25px; background: url(../images/bg_box3.png) no-repeat; background-size: 100% 100%;float: left;}
 .box3_con{width: 930px; height: 433px; float: left; }
 .box3_con .box3_con_left{width: 930px; height: 470px; float: left; margin-top: 30px;}

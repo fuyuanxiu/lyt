@@ -1,3 +1,17 @@
+
+var dataList = dataType1.data//原始数据
+dataList=dataList[2]
+
+var xAxis=[];
+var yAxis1=[];//计划数量
+var yAxis2=[];//完成数量
+
+$.each(dataList,function (i, item) {
+	xAxis.push(item.TASK_NO)
+	yAxis1.push(item.PLAN_QTY)
+	yAxis2.push(item.COMPLETE_QTY)
+})
+
 var dom = document.getElementById("box2");
 var myChart = echarts.init(dom);
 var app = {};
@@ -68,7 +82,8 @@ var labelOption = {
         align: app.config.align,
         verticalAlign: app.config.verticalAlign,
         rotate: app.config.rotate,
-        formatter: '{c}  {name|{a}}',
+        //formatter: '{c}  {name|{a}}',
+        formatter: '{c}',
         fontSize: 10,
         rich: {
             name: {
@@ -92,7 +107,7 @@ option = {
                 color:'#dbdbdb',
                 fontSize:10
            },
-        data: ['计划数', '投入数', '产出数']
+        data: ['计划数量', '完成数量']
     },
     textStyle:{//图例文字的样式
                 color:'#dbdbdb',
@@ -103,7 +118,7 @@ option = {
         {
             type: 'category',
             axisTick: {show: false},
-            data: ['test1', 'test2', 'test3', 'test4', 'test5']
+            data: xAxis
         }
     ],
     yAxis: [
@@ -113,24 +128,18 @@ option = {
     ],
     series: [
         {
-            name: '计划数',
+            name: '计划数量',
             type: 'bar',
             barGap: 0,
             label: labelOption,
-            data: [320, 332, 301, 334, 390]
+            data: yAxis1
         },
         {
-            name: '投入数',
+            name: '完成数量',
             type: 'bar',
             label: labelOption,
-            data: [220, 182, 191, 234, 290]
-        },
-        {
-            name: '产出数',
-            type: 'bar',
-            label: labelOption,
-            data: [150, 232, 201, 154, 190]
-        },
+            data: yAxis2
+        }
         /*{
             name: 'Wetland',
             type: 'bar',
