@@ -119,7 +119,7 @@ function login(){
         // }
         $.ajax({
             type: "get",
-            url: context+"/login1",
+            url: context+"login1",
             data: { "username":$("#username").val(), "password":$("#password").val(), "rememberMe":$("[name='rememberMe']").is(":checked") },
             dataType: 'json',
             success: function (res) {
@@ -130,7 +130,7 @@ function login(){
                             time: 800,
                             icon: 1
                         }, function () {
-                            window.location.href = context+"/home";
+                            window.location.href = context+"home";
                         });
                     }, 800);
                     /*layer.alert("登录成功",function () {

@@ -125,17 +125,12 @@
 	</div>
 	<footer> 提高生产效率 打造卓越品质 </footer>
 	<script th:inline="javascript">
+	var context = [[@{/}]];
         var dataType1=[[${dataType1}]];
         var dataType2=[[${dataType2}]];
      </script>
-	<script type="text/javascript" src="../kanban/scripts/tablebox.js"></script>
+	 <!-- <script type="text/javascript" src="../kanban/scripts/tablebox.js"></script> -->
 	<script type="text/javascript" src="../kanban/js/echarts.min.js"></script>
-	<!-- 	<script type="text/javascript" src="js/box1.js"></script> -->
-	<script type="text/javascript" src="../kanban/scripts/box2.js"></script>
-	<script type="text/javascript" src="../kanban/scripts/box4.js"></script>
-	<!-- 	<script type="text/javascript" src="js/box3_left.js"></script>
-		<script type="text/javascript" src="js/box3_right.js"></script>
-		
-		<script type="text/javascript" src="js/box5.js"></script> -->
+	<script type="text/javascript" src="../kanban/scripts/workshop.js"></script>
 </body>
 </html>

@@ -65,4 +65,19 @@ public class kanbanController extends WebController {
 		}	
 		return mav;
 	}   
+	
+	@ApiOperation(value = "获取生产车间看板信息", notes = "获取生产车间看板信息", hidden = true)
+	@RequestMapping(value = "/getKanbanList", method = RequestMethod.GET)
+	@ResponseBody
+	public ApiResponseResult getKanbanList(String kanbanNo,String dataType) {
+		try {
+			ApiResponseResult result = kanbanService.getKanbanData(kanbanNo,"",dataType);
+			logger.debug("获取生产车间看板信息=getKanbanList:" + result);
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("获取生产车间看板信息失败！", e);
+			return ApiResponseResult.failure("获取生产车间看板信息失败！");
+		}
+	}
 }
