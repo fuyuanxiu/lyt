@@ -40,6 +40,11 @@ function tableBox(){
 	    $('.tbl-header tbody').append(str);
 	});
 	
+	if (MyMarhq != null) {// 判断计时器是否为空-关闭
+		clearInterval(MyMarhq);
+		MyMarhq = null;
+	}
+	
 	if(Items.length > 8){
 	    $('.tbl-body tbody').html($('.tbl-body tbody').html()+$('.tbl-body tbody').html());
 	    $('.tbl-body').css('top', '0');
