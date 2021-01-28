@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:include="layout :: htmlhead" th:with="title='质量IQC来料检验台账'"></head>
+<body class="layui-layout-body">
+	<div class="layui-layout layui-layout-admin">
+		<div>
+			<form id="searchFrom" class="layui-form layui-form-pane"
+				lay-filter="searchFrom" method="post" action=""
+				style="margin-top: 5px; margin-left: 10px;">
+				<div class="layui-form-item" style="margin-bottom: 0px">
+					<div class="layui-inline">
+						<label class="layui-form-label">年份</label>
+						<div class="layui-input-inline" style="width: 140px;">
+							<input type="text" name="inputCode" id="inputCode"
+								class="layui-input"
+								style="position: absolute; z-index: 2; width: 80%;"
+								autocomplete="off" placeholder="选择或输入年份"> <select
+								id="selectCode" lay-filter="selectCode" autocomplete="off"
+								class="layui-select" lay-search>
+								<option value=''>请选择年份</option>
+								<option value='2020'>2020</option>
+								<option value='2021'>2021</option>
+								<option value='2022'>2022</option>
+							</select>
+						</div>
+						<label class="layui-form-label">月份</label>
+						<div class="layui-input-inline" style="width: 120px;">
+							<select class="layui-input" name="month" id="month">
+								<option value=''>请选择月份</option>
+								<option value='1'>1月</option>
+								<option value='2'>2月</option>
+								<option value='3'>3月</option>
+								<option value='4'>4月</option>
+								<option value='5'>5月</option>
+								<option value='6'>6月</option>
+								<option value='7'>7月</option>
+								<option value='8'>8月</option>
+								<option value='9'>9月</option>
+								<option value='10'>10月</option>
+								<option value='11'>11月</option>
+								<option value='12'>12月</option>
+							</select>
+						</div>
+						<label class="layui-form-label">目标值</label>
+						<div class="layui-input-inline" style="width: 150px;">
+							<input type="text" class="layui-input" name="target" lay-verify="double"
+								placeholder="请输入目标值"  value='97.0' id="target"> <span
+								style="position: absolute; top: 0%; right: 0%; display: table-cell; background-color: #f2f2f2; white-space: nowrap; padding: 7px 10px;">%</span>
+						</div>
+						<button class="layui-btn layui-btn-sm" lay-submit
+							lay-filter="searchSubmit">查询</button>
+						<button type="reset"
+							class="layui-btn layui-btn-primary layui-btn-sm" title="重置">
+							<i class="layui-icon">&#xe669;</i>重置
+						</button>
+					</div>
+				</div>
+			</form>
+			<div class="layui-tab layui-tab-card">
+				<ul class="layui-tab-title">
+					<li class="layui-this">汇总</li>
+					<li>检验明细</li>
+				</ul>
+				<div class="layui-tab-content">
+					<div class="layui-tab-item layui-show">
+						<div class="layui-card">
+							<div class="layui-card-body">
+								<div id="echart1" style="width: 100%; height: 165px;">
+								</div>
+							</div>
+						</div>
+						<table id="listTable" lay-filter="listTable"></table>
+					</div>
+					<div class="layui-tab-item">
+						<table id="listTable2" lay-filter="listTable2"></table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script th:inline="javascript">
+	    var context = [[@{/}]];
+        var taskNoList=[[${taskNoList}]];
+     </script>
+		<script th:src="@{/js/lyt/43789.js}" src="/js/lyt/43789.js"></script>
+	</div>
+</body>
+</html>

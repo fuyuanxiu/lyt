@@ -65,8 +65,12 @@ var getMenus=function(data){
                     a.append("<span class='layui-nav-more'></span>");
                     var dl=$("<dl class='layui-nav-child'></dl>");
                     for (var y in childArry) {
-                        var dd=$("<dd><a lay-href='"+context+childArry[y].PAGE_URL+"'>"+childArry[y].BS_NAME+"</a></dd>");
-                        //判断选中状态
+                        //var dd=$("<dd><a lay-href='"+context+childArry[y].PAGE_URL+"'>"+childArry[y].BS_NAME+"</a></dd>");
+                    	//本机调试-用下列代码 
+                    	var dd=$("<dd><a lay-href='/lyt_report/toPage?pageId="+childArry[y].ID+"'>"+childArry[y].BS_NAME+"</a></dd>");
+                    	 //war包-用下列代码
+                    	 //var dd=$("<dd><a lay-href="+context+"/lyt_report/toPage?pageId="+childArry[y].ID+">"+childArry[y].BS_NAME+"</a></dd>");
+                    	//判断选中状态
                         if(pathUri.indexOf(childArry[y].PAGE_URL)>0){
                             li.addClass("layui-nav-itemed");
                             dd.addClass("layui-this")

@@ -40,6 +40,12 @@ public class SysUser{
 
     @Column(length = 20)
     protected String fsystem;
+    
+    @Column(length = 20)
+    protected String ffactory;
+    
+    @Column(length = 20)
+    protected String fcompany;
 
     public String getFid() {
         return fid;
@@ -96,6 +102,22 @@ public class SysUser{
     public void setFsystem(String fsystem) {
         this.fsystem = fsystem;
     }
+
+	public String getFfactory() {
+		return ffactory;
+	}
+
+	public void setFfactory(String ffactory) {
+		this.ffactory = ffactory;
+	}
+
+	public String getFcompany() {
+		return fcompany;
+	}
+
+	public void setFcompany(String fcompany) {
+		this.fcompany = fcompany;
+	}
 }
 
 ////@NamedStoredProcedureQuery(name = "User.plusl",procedureName = "PRC_RF_J1_USER_LOGIN",parameters = {
