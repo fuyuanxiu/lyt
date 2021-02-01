@@ -15,7 +15,7 @@ $(function() {
 			method : 'get',// 默认：get请求
 			// toolbar : '#toolbar', // 开启工具栏，此处显示默认图标，可以自定义模板，详见文档
 			cellMinWidth : 80,
-			height : 'full-315',// 固定表头&full-查询框高度
+			height : 'full-340',// 固定表头&full-查询框高度
 
 			even : true,// 条纹样式
 			data : [],
@@ -361,8 +361,8 @@ $(function() {
 					formatter : '合格批率: {c0}%<br />目标值: {c1}%'
 				},
 				grid : {
-					x : 25,// 左边距
-					y : 20,// 上边距
+					x : 30,// 左边距
+					y : 30,// 上边距
 					x2 : 0,// 右边距
 					y2 : 20,// 下边距
 					borderWidth : 0
@@ -437,26 +437,6 @@ $(function() {
 
 	});
 });
-
-function getObjectKeys(object) {// 获取数组键值
-	var keys = [];
-	for ( var property in object) {
-		if (property.indexOf("D") != -1) {
-			keys.push(property);
-		}
-	}
-	return keys;
-}
-
-function getObjectValue(object) {
-	var keys = [];
-	for ( var property in object) {
-		if (property.indexOf("D") != -1) {
-			keys.push(object[property]);
-		}
-	}
-	return keys;
-}
 
 function getReport1(params) {
 	tableIns.reload({

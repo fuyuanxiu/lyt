@@ -10,9 +10,7 @@
 				style="margin-top: 5px; margin-left: 10px;">
 				<div class="layui-form-item" style="margin-bottom: 0px">
 					<div class="layui-inline">
-
 						<label class="layui-form-label">工单号</label>
-
 						<div class="layui-input-inline" style="width: 220px;">
 							<input type="text" placeholder="请选择工单号" name="taskNo" id="taskNo"
 								class="layui-input"
@@ -28,10 +26,16 @@
 								style="background: #efefef;" class="layui-input" type="text" />
 						</div>
 						<label class="layui-form-label">型号</label>
-						<div class="layui-input-inline" style="width: 160px;">
+						<div class="layui-input-inline" style="width: 132px;">
 							<input id="prodType" name="prodType" autocomplete="off" disabled
 								style="background: #efefef;" class="layui-input" type="text" />
 						</div>
+						<button class="layui-btn layui-btn-sm layui-btn-normal" lay-submit
+							id="exportData1" lay-filter="exportData1">导出明细
+						</button>
+						<button class="layui-btn layui-btn-sm layui-btn-normal" lay-submit
+							id="exportData2" lay-filter="exportData2">导出统计
+						</button>
 					</div>
 				</div>
 				<div class="layui-form-item" style="margin-bottom: 0px">

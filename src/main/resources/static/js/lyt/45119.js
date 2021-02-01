@@ -203,6 +203,77 @@ $(function() {
 			getReport(params)
 			return false;
 		});
+		
+		var tip_index1 = 0;
+		$(document).on('mouseover', '#exportData1', function(data) {
+			tip_index1 = layer.tips("<span style='font-size:13px;line-height:18px;'>两次导出间隔为20秒</span>", ($(this)), {
+				tips : [ 3, '5CBA59' ],
+				time : 0,
+				time : 0,
+				area : [ '150px' ]
+			});
+		}).on('mouseleave', '#exportData1', function() {
+			layer.close(tip_index1);
+		});
+		var tip_index2 = 0;
+		$(document).on('mouseover', '#exportData2', function(data) {
+			tip_index2 = layer.tips("<span style='font-size:13px;line-height:18px;'>两次导出间隔为20秒</span>", ($(this)), {
+				tips : [ 3, '5CBA59' ],
+				time : 0,
+				time : 0,
+				area : [ '150px' ]
+			});
+		}).on('mouseleave', '#exportData2', function() {
+			layer.close(tip_index2);
+		});
+			
+		form.on('submit(exportData1)', function(data) {
+			$("#exportData1").addClass("layui-btn-disabled");
+			$('#exportData1').attr("disabled",true);
+			$("#exportData2").addClass("layui-btn-disabled");
+			$('#exportData2').attr("disabled",true);
+			
+			var params = {
+				"taskNo" :data.field.taskNo,
+				"batNo" : data.field.batNo,
+				"begTime" : data.field.begTime,
+				"endTime" : data.field.endTime,
+			};
+			doExport1(params)
+			
+			var countdown = setInterval(function(){
+				$("#exportData1").removeClass("layui-btn-disabled");
+				$('#exportData1').attr("disabled",false);
+				$("#exportData2").removeClass("layui-btn-disabled");
+				$('#exportData2').attr("disabled",false);
+			},20*1000);
+			
+			return false;
+		});
+		form.on('submit(exportData2)', function(data) {
+			$("#exportData1").addClass("layui-btn-disabled");
+			$('#exportData1').attr("disabled",true);
+			$("#exportData2").addClass("layui-btn-disabled");
+			$('#exportData2').attr("disabled",true);
+			
+			var params = {
+				"taskNo" :data.field.taskNo,
+				"batNo" : data.field.batNo,
+				"begTime" : data.field.begTime,
+				"endTime" : data.field.endTime,
+			};
+			doExport2(params)
+			
+			var countdown = setInterval(function(){
+				$("#exportData1").removeClass("layui-btn-disabled");
+				$('#exportData1').attr("disabled",false);
+				$("#exportData2").removeClass("layui-btn-disabled");
+				$('#exportData2').attr("disabled",false);
+			},20*1000);
+			
+			return false;
+		});
+		
 		//监听下拉选择事件
 		form.on('select(taskNoSelect)',function(data) { // 选择移交单位 赋值给input框
 			var select_text = data.elem[data.elem.selectedIndex].text;
@@ -248,8 +319,20 @@ $(function() {
 		});
 
 	});
-
 });
+
+function doExport1(params){
+	
+	location.href = context + "lyt_report/getPDTestExport?taskNo="+params.taskNo+"&batNo="+
+	params.batNo+"&begTime="+ params.begTime+"&endTime="+params.endTime;
+}
+
+function doExport2(params){
+
+	location.href = context + "lyt_report/getPDSumExport?taskNo="+params.taskNo+"&batNo="+
+	params.batNo+"&begTime="+ params.begTime+"&endTime="+params.endTime;
+}
+
 function getReport(params) {
 	tableIns.reload({
 		url : context + 'lyt_report/getPDTestReport',

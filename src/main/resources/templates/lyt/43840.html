@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:include="layout :: htmlhead" th:with="title='生产报表——按工单'"></head>
+<body class="layui-layout-body">
+	<div class="layui-layout layui-layout-admin">
+		<div>
+			<form id="searchFrom" class="layui-form layui-form-pane"
+				lay-filter="searchFrom" method="post" action=""
+				style="margin-top: 5px; margin-left: 10px;">
+				<div class="layui-form-item" style="margin-bottom: 0px">
+					<div class="layui-inline">
+						<label class="layui-form-label">工序编码</label>
+						<div class="layui-input-inline" style="width: 180px;">
+							<input type="text" name="inputCode" id="inputCode"
+								class="layui-input"
+								style="position: absolute; z-index: 2; width: 80%;"
+								autocomplete="off" placeholder="选择或输入工序编码"> <select
+								id="selectCode" lay-filter="selectCode" autocomplete="off"
+								class="layui-select" lay-search>
+							</select>
+						</div>
+						
+						<label class="layui-form-label layui-required">开始时间</label>
+						<div class="layui-input-inline" style="width: 170px;">
+							<input type="text" class="layui-input" name="begTime" lay-verify="required"
+								placeholder="请选择开始日期时间" id="begTime">
+						</div>
+
+						<label class="layui-form-label layui-required">结束时间</label>
+						<div class="layui-input-inline" style="width: 170px;">
+							<input type="text" class="layui-input" name="endTime" lay-verify="required"
+								placeholder="请选择结束日期时间" id="endTime">
+						</div>
+						
+						<button class="layui-btn layui-btn-sm" lay-submit
+							lay-filter="searchSubmit">查询</button>
+						<button type="reset"
+							class="layui-btn layui-btn-primary layui-btn-sm" title="重置">
+							<i class="layui-icon">&#xe669;</i>重置
+						</button>
+					</div>
+				</div>
+			</form>
+			<div class="layui-card">
+				<div class="layui-card-body">
+					<div id="echart1" style="width: 100%; height: 245px;"></div>
+				</div>
+			</div>
+			<table id="listTable" lay-filter="listTable"></table>
+		</div>
+		<script th:inline="javascript">
+	    var context = [[@{/}]];
+        var procList=[[${procList}]];
+        
+     </script>
+		<script th:src="@{/js/lyt/43840.js}" src="/js/lyt/43840.js"></script>
+	</div>
+</body>
+</html>

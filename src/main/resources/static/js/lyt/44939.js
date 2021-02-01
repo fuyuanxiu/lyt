@@ -170,6 +170,42 @@ $(function() {
 			getReport(params)
 			return false;
 		});
+		
+		var tip_index = 0;
+		$(document).on('mouseover', '#exportData', function(data) {
+			tip_index = layer.tips("<span style='font-size:13px;line-height:18px;'>两次导出间隔为30秒</span>", ($(this)), {
+				tips : [ 3, '5CBA59' ],
+				time : 0,
+				time : 0,
+				area : [ '150px' ]
+			});
+
+		}).on('mouseleave', '#exportData', function() {
+			layer.close(tip_index);
+		});
+		
+		form.on('submit(exportData)', function(data) {
+			$("#exportData").addClass("layui-btn-disabled");
+			$('#exportData').attr("disabled",true);				
+			
+			var params = {
+				"taskNo" :data.field.taskNo,
+				"batNo" : data.field.batNo,
+				"begTime" : data.field.begTime,
+				"endTime" : data.field.endTime,
+			};
+			doExport(params)
+			
+			var countdown = setInterval(function(){
+				$("#exportData").removeClass("layui-btn-disabled");
+				$('#exportData').attr("disabled",false);
+			},30*1000);
+			
+			return false;
+		});
+		
+		
+		
 		//监听下拉选择事件
 		form.on('select(taskNoSelect)',function(data) { // 选择移交单位 赋值给input框
 			var select_text = data.elem[data.elem.selectedIndex].text;
@@ -217,6 +253,13 @@ $(function() {
 	});
 
 });
+
+function doExport(params){
+	location.href = context + "lyt_report/getZJTestExport?taskNo="+params.taskNo+"&batNo="+
+	params.batNo+"&begTime="+ params.begTime+"&endTime="+params.endTime;
+}
+
+
 function getReport(params) {
 	tableIns.reload({
 		url : context + 'lyt_report/getZJTestReport',

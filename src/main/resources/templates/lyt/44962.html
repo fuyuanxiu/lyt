@@ -21,15 +21,18 @@
 							</select>
 						</div>
 						<label class="layui-form-label">产品编码</label>
-						<div class="layui-input-inline" style="width: 170px;">
+						<div class="layui-input-inline" style="width: 160px;">
 						  <input id="prodCode" name="prodCode" autocomplete="off" disabled 
 								style="background: #efefef;" class="layui-input" type="text" />
 						</div> 
 						<label class="layui-form-label">型号</label>
-						<div class="layui-input-inline" style="width: 170px;">
-						  <input id="prodType" name="prodType" autocomplete="off" disabled 
+						<div class="layui-input-inline" style="width: 160px;">
+						<input id="prodType" name="prodType" autocomplete="off" disabled 
 								style="background: #efefef;" class="layui-input" type="text" />
 						</div> 
+						<button class="layui-btn layui-btn-sm layui-btn-normal" lay-submit
+							id="exportData" lay-filter="exportData">导出	
+						</button>
 					</div>
 				</div>
 				<div class="layui-form-item" style="margin-bottom: 0px">
@@ -41,13 +44,13 @@
 						</div>
 
 						<label class="layui-form-label layui-required">开始时间</label>
-						<div class="layui-input-inline" style="width: 170px;">
+						<div class="layui-input-inline" style="width: 160px;">
 							<input type="text" class="layui-input" name="begTime"
 								placeholder="请选择开始日期时间" id="begTime">
 						</div>
 
 						<label class="layui-form-label layui-required">结束时间</label>
-						<div class="layui-input-inline" style="width: 170px;">
+						<div class="layui-input-inline" style="width: 160px;">
 							<input type="text" class="layui-input" name="endTime"
 								placeholder="请选择结束日期时间" id="endTime">
 						</div>
