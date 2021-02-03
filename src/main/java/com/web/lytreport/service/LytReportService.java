@@ -43,12 +43,17 @@ public interface LytReportService {
 		
 	//质量IQC来料检验台账-1
 	public ApiResponseResult getQualCheckReport1(String year,String month, String target,Integer dataType)throws Exception;
-	
+	//导出-质量IQC来料检验台账-汇总
+	public void getQualCheckExport1(HttpServletResponse response,String year,String month, String target,Integer dataType)throws Exception;
+			
 	//质量IQC来料检验台账-2
 	public ApiResponseResult getQualCheckReport2(String year,String month, String target,Integer dataType)throws Exception;
-	
+	//导出-质量IQC来料检验台账-汇总
+	public void getQualCheckExport2(HttpServletResponse response,String year,String month, String target,Integer dataType)throws Exception;
+		
 	//生产日报-按工单
-	public ApiResponseResult getProdDailyByTaskReport(String proc,String begTime,
-			String endTime, Integer dataType)throws Exception;
+	public ApiResponseResult getProdDailyByTaskReport(String proc,String begTime,String endTime, Integer dataType)throws Exception;
+	//导出-生产日报-按工单
+	public void getProdDailyByTaskExport(HttpServletResponse response,String proc,String begTime,String endTime, Integer dataType)throws Exception;
 	
 }

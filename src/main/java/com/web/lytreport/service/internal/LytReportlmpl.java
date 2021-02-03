@@ -197,31 +197,43 @@ public class LytReportlmpl extends ReportPrcUtils implements LytReportService {
 	}
 	
 	/**
-	 * 质量IQC来料检验台账(1)
+	 * 质量IQC来料检验台账(1)-汇总
 	 **/
 	public ApiResponseResult getQualCheckReport1(String year, String month, String target, Integer dataType)
 			throws Exception {
 		List<Object> list = getQualCheckReportPrc("PRC_APP_IQCREPORT_DATA",
 				UserUtil.getSessionUser().getFcompany() + "", UserUtil.getSessionUser().getFfactory() + "", year, month,
-				target, dataType, UserUtil.getSessionUser().getFcode());
+				target, dataType, UserUtil.getSessionUser().getFcode(),0);
 		if (!list.get(0).toString().equals("0")) {// 存储过程调用失败 //判断返回游标
 			return ApiResponseResult.failure(list.get(1).toString());
 		}	
 		return ApiResponseResult.success().data(list.get(2));
 	}
+	public void getQualCheckExport1(HttpServletResponse response,String year,
+			String month, String target, Integer dataType)throws Exception{
+		List<Object> list = getQualCheckReportPrc("PRC_APP_IQCREPORT_DATA", UserUtil.getSessionUser().getFcompany() + "", UserUtil.getSessionUser().getFfactory() + "", year, month,
+				target, dataType, UserUtil.getSessionUser().getFcode(),1);
+		Export3(response,list.get(2),list.get(3));
+	}
 	
 	/**
-	 * 质量IQC来料检验台账(2)
+	 * 质量IQC来料检验台账(2)-明细
 	 **/
 	public ApiResponseResult getQualCheckReport2(String year, String month, String target, Integer dataType)
 			throws Exception {
 		List<Object> list = getQualCheckReportPrc("PRC_APP_IQCREPORT_DATA",
 				UserUtil.getSessionUser().getFcompany() + "", UserUtil.getSessionUser().getFfactory() + "", year, month,
-				target, dataType, UserUtil.getSessionUser().getFcode());
+				target, dataType, UserUtil.getSessionUser().getFcode(),0);
 		if (!list.get(0).toString().equals("0")) {// 存储过程调用失败 //判断返回游标
 			return ApiResponseResult.failure(list.get(1).toString());
 		}
 		return ApiResponseResult.success().data(list.get(2));
+	}
+	public void getQualCheckExport2(HttpServletResponse response,String year,
+			String month, String target, Integer dataType)throws Exception{
+		List<Object> list = getQualCheckReportPrc("PRC_APP_IQCREPORT_DATA", UserUtil.getSessionUser().getFcompany() + "", UserUtil.getSessionUser().getFfactory() + "", year, month,
+				target, dataType, UserUtil.getSessionUser().getFcode(),1);
+		Export3(response,list.get(2),list.get(3));
 	}
 	
 	/**
@@ -237,5 +249,11 @@ public class LytReportlmpl extends ReportPrcUtils implements LytReportService {
 			return ApiResponseResult.failure(list.get(1).toString());
 		}
 		return ApiResponseResult.success().data(list.get(2));
+	}
+	public void getProdDailyByTaskExport(HttpServletResponse response,String proc,String begTime,
+			String endTime, Integer dataType)throws Exception{
+		List<Object> list = getProdDailyByTaskReportPrc("PRC_APP_TASK_CALCULATE_DATA",
+				proc, begTime,endTime, dataType);
+		Export3(response,list.get(2),list.get(3));
 	}
 }

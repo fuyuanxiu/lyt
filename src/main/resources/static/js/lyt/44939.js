@@ -173,7 +173,7 @@ $(function() {
 		
 		var tip_index = 0;
 		$(document).on('mouseover', '#exportData', function(data) {
-			tip_index = layer.tips("<span style='font-size:13px;line-height:18px;'>两次导出间隔为30秒</span>", ($(this)), {
+			tip_index = layer.tips("<span style='font-size:13px;line-height:18px;'>两次导出间隔为20秒</span>", ($(this)), {
 				tips : [ 3, '5CBA59' ],
 				time : 0,
 				time : 0,
@@ -199,12 +199,10 @@ $(function() {
 			var countdown = setInterval(function(){
 				$("#exportData").removeClass("layui-btn-disabled");
 				$('#exportData').attr("disabled",false);
-			},30*1000);
+			},20*1000);
 			
 			return false;
 		});
-		
-		
 		
 		//监听下拉选择事件
 		form.on('select(taskNoSelect)',function(data) { // 选择移交单位 赋值给input框

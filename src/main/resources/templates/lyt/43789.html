@@ -13,7 +13,7 @@
 						<label class="layui-form-label">年份</label>
 						<div class="layui-input-inline" style="width: 140px;">
 							<input type="text" name="inputCode" id="inputCode"
-								class="layui-input"
+								class="layui-input" lay-verify="required"
 								style="position: absolute; z-index: 2; width: 80%;"
 								autocomplete="off" placeholder="选择或输入年份"> <select
 								id="selectCode" lay-filter="selectCode" autocomplete="off"
@@ -26,7 +26,7 @@
 						</div>
 						<label class="layui-form-label">月份</label>
 						<div class="layui-input-inline" style="width: 120px;">
-							<select class="layui-input" name="month" id="month">
+							<select class="layui-input" name="month" id="month" lay-verify="required">
 								<option value=''>请选择月份</option>
 								<option value='1'>1月</option>
 								<option value='2'>2月</option>
@@ -43,7 +43,7 @@
 							</select>
 						</div>
 						<label class="layui-form-label">目标值</label>
-						<div class="layui-input-inline" style="width: 150px;">
+						<div class="layui-input-inline" style="width: 100px;">
 							<input type="text" class="layui-input" name="target" lay-verify="double"
 								placeholder="请输入目标值"  value='97.0' id="target"> <span
 								style="position: absolute; top: 0%; right: 0%; display: table-cell; background-color: #f2f2f2; white-space: nowrap; padding: 7px 10px;">%</span>
@@ -53,6 +53,12 @@
 						<button type="reset"
 							class="layui-btn layui-btn-primary layui-btn-sm" title="重置">
 							<i class="layui-icon">&#xe669;</i>重置
+						</button>
+						<button class="layui-btn layui-btn-sm layui-btn-normal" lay-submit
+							id="exportData1" lay-filter="exportData1">导出汇总		
+						</button>
+						<button class="layui-btn layui-btn-sm layui-btn-normal" lay-submit
+							id="exportData2" lay-filter="exportData2">导出明细	
 						</button>
 					</div>
 				</div>

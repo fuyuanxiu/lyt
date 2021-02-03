@@ -272,6 +272,19 @@ public class LytReportController extends WebController {
 			return ApiResponseResult.failure("获取质量IQC来料检验台账失败！");
 		}
 	}
+	@ApiOperation(value = "导出质量IQC来料检验台账-汇总", notes = "导出质量IQC来料检验台账-汇总", hidden = true)
+	@RequestMapping(value = "/getQualCheckExport1", method = RequestMethod.GET)
+	@ResponseBody
+	public void getQualCheckExport1(HttpServletResponse response,String year,String month, String target,Integer dataType) {
+		try {
+			lytReportService.getQualCheckExport1(response,year,month,target,dataType);
+			logger.debug("导出质量IQC来料检验台账=getQualCheckExport1:");
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("导出质量IQC来料检验台账失败！", e);
+		}
+	}
+	
 	@ApiOperation(value = "获取质量IQC来料检验台账", notes = "获取质量IQC来料检验台账", hidden = true)
 	@RequestMapping(value = "/getQualCheckReport2", method = RequestMethod.GET)
 	@ResponseBody
@@ -285,6 +298,18 @@ public class LytReportController extends WebController {
 			e.printStackTrace();
 			logger.error("获取质量IQC来料检验台账失败！", e);
 			return ApiResponseResult.failure("获取质量IQC来料检验台账失败！");
+		}
+	}
+	@ApiOperation(value = "导出质量IQC来料检验台账-明细", notes = "导出质量IQC来料检验台账-明细", hidden = true)
+	@RequestMapping(value = "/getQualCheckExport2", method = RequestMethod.GET)
+	@ResponseBody
+	public void getQualCheckExport2(HttpServletResponse response,String year,String month, String target,Integer dataType) {
+		try {
+			lytReportService.getQualCheckExport2(response,year,month,target,dataType);
+			logger.debug("导出质量IQC来料检验台账-明细=getQualCheckExport2:");
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("导出质量IQC来料检验台账-明细失败！", e);
 		}
 	}
 	
@@ -307,6 +332,19 @@ public class LytReportController extends WebController {
 			e.printStackTrace();
 			logger.error("获取生产日报-按工单报表失败！", e);
 			return ApiResponseResult.failure("获取生产日报-按工单报表失败！");
+		}
+	}
+	@ApiOperation(value = "导出生产日报-按工单报表", notes = "导出生产日报-按工单报表", hidden = true)
+	@RequestMapping(value = "/getProdDailyByTaskExport", method = RequestMethod.GET)
+	@ResponseBody
+	public void getProdDailyByTaskExport(HttpServletResponse response,String proc,String begTime,
+			String endTime) {
+		try {
+			lytReportService.getProdDailyByTaskExport(response,proc, begTime,endTime, 1);
+			logger.debug("导出生产日报-按工单报表=getProdDailyByTaskExport:");
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("导出生产日报-按工单报表失败！", e);
 		}
 	}
 }

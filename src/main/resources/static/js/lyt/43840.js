@@ -110,6 +110,39 @@ $(function() {
 			getReport2(params2)
 			return false;
 		});
+		
+		var tip_index = 0;
+		$(document).on('mouseover', '#exportData', function(data) {
+			tip_index = layer.tips("<span style='font-size:13px;line-height:18px;'>两次导出间隔为15秒</span>", ($(this)), {
+				tips : [ 3, '5CBA59' ],
+				time : 0,
+				time : 0,
+				area : [ '150px' ]
+			});
+
+		}).on('mouseleave', '#exportData', function() {
+			layer.close(tip_index);
+		});
+		
+		form.on('submit(exportData)', function(data) {
+			$("#exportData").addClass("layui-btn-disabled");
+			$('#exportData').attr("disabled",true);				
+			
+			var params = {
+					"proc" : data.field.inputCode,
+					"begTime" : data.field.begTime,
+					"endTime" : data.field.endTime,
+			};
+			doExport(params)
+			
+			var countdown = setInterval(function(){
+				$("#exportData").removeClass("layui-btn-disabled");
+				$('#exportData').attr("disabled",false);
+			},15*1000);
+			
+			return false;
+		});
+		
 		form.on('select(selectCode)', function(data) { // 选择移交单位 赋值给input框
 			var select_text = data.elem[data.elem.selectedIndex].text;
 			$("#inputCode").val(select_text.substring(0, select_text.indexOf("-")));
@@ -348,6 +381,12 @@ $(function() {
 
 	});
 });
+
+function doExport(params){	
+	location.href = context + "lyt_report/getProdDailyByTaskExport?proc="+params.proc+"&begTime="+
+	params.begTime+"&endTime="+ params.endTime;
+}
+
 function setSelectData() {
 	var data = procList.data
 	// console.log(data)

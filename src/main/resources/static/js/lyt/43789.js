@@ -300,6 +300,72 @@ $(function() {
 			getReport2(params2)
 			return false;
 		});
+		/**导出-start**/
+		//提示语句
+		var tip_index1 = 0;
+		$(document).on('mouseover', '#exportData1', function(data) {
+			tip_index1 = layer.tips("<span style='font-size:13px;line-height:18px;'>两次导出间隔为15秒</span>", ($(this)), {
+				tips : [ 3, '5CBA59' ],
+				time : 0,
+				time : 0,
+				area : [ '150px' ]
+			});
+		}).on('mouseleave', '#exportData1', function() {
+			layer.close(tip_index1);
+		});
+		var tip_index2 = 0;
+		$(document).on('mouseover', '#exportData2', function(data) {
+			tip_index2 = layer.tips("<span style='font-size:13px;line-height:18px;'>两次导出间隔为15秒</span>", ($(this)), {
+				tips : [ 3, '5CBA59' ],
+				time : 0,
+				time : 0,
+				area : [ '150px' ]
+			});
+		}).on('mouseleave', '#exportData2', function() {
+			layer.close(tip_index2);
+		});
+		
+		form.on('submit(exportData1)', function(data) {
+			$("#exportData1").addClass("layui-btn-disabled");
+			$('#exportData1').attr("disabled",true);
+			$("#exportData2").addClass("layui-btn-disabled");
+			$('#exportData2').attr("disabled",true);		
+			var params = {
+				"target" : data.field.target,
+				"month" : data.field.month,
+				"year" : data.field.inputCode,
+				"dataType" : 1
+			};
+			doExport1(params)	
+			var countdown = setInterval(function(){
+				$("#exportData1").removeClass("layui-btn-disabled");
+				$('#exportData1').attr("disabled",false);
+				$("#exportData2").removeClass("layui-btn-disabled");
+				$('#exportData2').attr("disabled",false);
+			},15*1000);	
+			return false;
+		});
+		form.on('submit(exportData2)', function(data) {
+			$("#exportData1").addClass("layui-btn-disabled");
+			$('#exportData1').attr("disabled",true);
+			$("#exportData2").addClass("layui-btn-disabled");
+			$('#exportData2').attr("disabled",true);		
+			var params = {
+				"target" : data.field.target,
+				"month" : data.field.month,
+				"year" : data.field.inputCode,
+				"dataType" : 2
+			};
+			doExport2(params)			
+			var countdown = setInterval(function(){
+				$("#exportData1").removeClass("layui-btn-disabled");
+				$('#exportData1').attr("disabled",false);
+				$("#exportData2").removeClass("layui-btn-disabled");
+				$('#exportData2').attr("disabled",false);
+			},15*1000);
+			return false;
+		});
+		/**导出-end**/
 		form.on('select(selectCode)', function(data) { // 选择移交单位 赋值给input框
 			var select_text = data.elem[data.elem.selectedIndex].text;
 			$("#inputCode").val(select_text);
@@ -437,6 +503,15 @@ $(function() {
 
 	});
 });
+
+function doExport1(params){
+	location.href = context + "lyt_report/getQualCheckExport1?target="+params.target+"&month="+
+	params.month+"&year="+ params.year+"&dataType="+params.dataType;
+}
+function doExport2(params){
+	location.href = context + "lyt_report/getQualCheckExport2?target="+params.target+"&month="+
+	params.month+"&year="+ params.year+"&dataType="+params.dataType;
+}
 
 function getReport1(params) {
 	tableIns.reload({

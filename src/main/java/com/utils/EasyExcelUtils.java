@@ -12,7 +12,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.excel.EasyExcel;
-import com.alibaba.excel.write.style.column.LongestMatchColumnWidthStyleStrategy;
+
+import com.alibaba.excel.write.style.column.SimpleColumnWidthStyleStrategy;
 
 public class EasyExcelUtils {
 
@@ -29,8 +30,8 @@ public class EasyExcelUtils {
     public static void download(HttpServletResponse response, String fileName, String[] headArray, String[] listKey, List<Map<String, Object>> dataList) throws Exception {
         try {
             EasyExcel.write(EasyExcelUtils.outputStream(response, fileName)).head(EasyExcelUtils.head(headArray))
-                    .registerWriteHandler(new LongestMatchColumnWidthStyleStrategy()).sheet()
-                    .doWrite(EasyExcelUtils.dataList(dataList, listKey));
+                    .registerWriteHandler(new SimpleColumnWidthStyleStrategy(15)).sheet()
+                    .doWrite(EasyExcelUtils.dataList(dataList, listKey));//LongestMatchColumnWidthStyleStrategy
         } catch (IOException e) {
             e.printStackTrace();
             throw new Exception("导出失败");

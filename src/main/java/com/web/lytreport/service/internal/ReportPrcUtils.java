@@ -128,9 +128,10 @@ public class ReportPrcUtils {
 
 	/**
 	 * 质量IQC来料检验台账 2020-01-22
+	 * action: 0(报表)/1(导出)
 	 **/
 	public List getQualCheckReportPrc(String prc_name, String company, String factory, String year, String month,
-			String target, Integer dataType, String usrName) throws Exception {
+			String target, Integer dataType, String usrName,Integer action) throws Exception {
 		List resultList = (List) jdbcTemplate.execute(new CallableStatementCreator() {
 			@Override
 			public CallableStatement createCallableStatement(Connection con) throws SQLException {
@@ -143,8 +144,7 @@ public class ReportPrcUtils {
 				cs.setString(5, target);
 				cs.setInt(6, dataType);
 				cs.setString(7, usrName);
-				cs.registerOutParameter(8, java.sql.Types.INTEGER);// 输出参数
-																	// 返回标识-标识
+				cs.registerOutParameter(8, java.sql.Types.INTEGER);// 输出参数 返回标识-标识
 				cs.registerOutParameter(9, java.sql.Types.VARCHAR);// 输出参数 返回标识
 				cs.registerOutParameter(10, -10);// 输出参数 追溯数据
 				return cs;
@@ -153,24 +153,34 @@ public class ReportPrcUtils {
 			public Object doInCallableStatement(CallableStatement cs) throws SQLException, DataAccessException {
 				List<Object> result = new ArrayList<>();
 				List<Map<String, Object>> l = new ArrayList();
+				List<Object> cols = new ArrayList();
 				cs.execute();
 				result.add(cs.getInt(8));
 				result.add(cs.getString(9));
 				if (cs.getString(8).toString().equals("0")) {
 					// 游标处理
 					ResultSet rs = (ResultSet) cs.getObject(10);
-					try {
-						if (dataType == 1) {
-							l = fitMapIQCX(rs);
-						} else {
-							l = fitMap(rs);
+					if(action==0){
+						try {
+							if (dataType == 1) {
+								l = fitMapIQCX(rs);
+							} else {
+								l = fitMap(rs);
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
 						}
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						result.add(l);
+					}else{
+						try {
+							l = fitMap(rs);
+							cols = fitMapCols(rs);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						result.add(l);
+						result.add(cols);
 					}
-					result.add(l);
-
 				}
 				System.out.println(l);
 				return result;
@@ -237,8 +247,7 @@ public class ReportPrcUtils {
 				cs.setString(2, begTime);
 				cs.setString(3, endTime);
 				cs.setInt(4, dataType);
-				cs.registerOutParameter(5, java.sql.Types.INTEGER);// 输出参数
-																	// 返回标识-标识
+				cs.registerOutParameter(5, java.sql.Types.INTEGER);// 输出参数 返回标识-标识
 				cs.registerOutParameter(6, java.sql.Types.VARCHAR);// 输出参数 返回标识
 				cs.registerOutParameter(7, -10);// 输出参数 追溯数据
 				return cs;
@@ -247,6 +256,7 @@ public class ReportPrcUtils {
 			public Object doInCallableStatement(CallableStatement cs) throws SQLException, DataAccessException {
 				List<Object> result = new ArrayList<>();
 				List<Map<String, Object>> l = new ArrayList();
+				List<Object> cols = new ArrayList();
 				cs.execute();
 				result.add(cs.getInt(5));
 				result.add(cs.getString(6));
@@ -255,11 +265,12 @@ public class ReportPrcUtils {
 					ResultSet rs = (ResultSet) cs.getObject(7);
 					try {
 						l = fitMap(rs);
+						cols=fitMapCols(rs);
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					result.add(l);
+					result.add(cols);
 				}
 				System.out.println(l);
 				return result;
