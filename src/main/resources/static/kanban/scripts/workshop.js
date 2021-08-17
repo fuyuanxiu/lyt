@@ -19,7 +19,7 @@ function doData(){
 function tableBox(){
 	var dataList = dataType1.data
 	var Items = dataList[2]
-	
+	console.log(Items)
 	$('.tbl-body tbody').empty();
 	$('.tbl-header tbody').empty();
 	var str = '';
@@ -32,6 +32,8 @@ function tableBox(){
 	        '<td>'+isNull(item.COMPLETE_QTY)+'</td>'+
 	        '<td>'+isNull(item.PFY)+'</td>'+
 	        '<td>'+isNull(item.PASS_PERCENT)+'</td>'+
+	        '<td>'+isNull(item.DOWN_DATE)+'</td>'+
+	        '<td>'+isNull(item.REAL_FINISH_TIME)+'</td>'+
 	        '<td>'+isNull(item.UPH)+'</td>'+
 	        '<td>'+isNull(item.PRODUCE_STATE)+'</td>'+
 	        '</tr>'

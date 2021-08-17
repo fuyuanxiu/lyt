@@ -69,7 +69,7 @@ var getMenus=function(data){
                     	//本机调试-用下列代码 
                     	//var dd=$("<dd><a lay-href='/lyt_report/toPage?pageId="+childArry[y].ID+"'>"+childArry[y].BS_NAME+"</a></dd>");
                     	 //war包-用下列代码
-                    	 var dd=$("<dd><a lay-href="+context+"/lyt_report/toPage?pageId="+childArry[y].ID+">"+childArry[y].BS_NAME+"</a></dd>");
+                    	var dd=$("<dd><a lay-href="+context+"/lyt_report/toPage?pageId="+childArry[y].ID+">"+childArry[y].BS_NAME+"</a></dd>");
                     	//判断选中状态
                         if(pathUri.indexOf(childArry[y].PAGE_URL)>0){
                             li.addClass("layui-nav-itemed");

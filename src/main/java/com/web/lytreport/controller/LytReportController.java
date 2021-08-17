@@ -317,7 +317,6 @@ public class LytReportController extends WebController {
 	/**
 	 * 43840.html
 	 * **/
-	
 	@ApiOperation(value = "获取生产日报-按工单报表", notes = "获取生产日报-按工单报表", hidden = true)
 	@RequestMapping(value = "/getProdDailyByTaskReport", method = RequestMethod.GET)
 	@ResponseBody
@@ -345,6 +344,65 @@ public class LytReportController extends WebController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error("导出生产日报-按工单报表失败！", e);
+		}
+	}
+	
+	/**
+	 * 46248.html
+	 * **/
+	@ApiOperation(value = "获取包装记录结果报表-汇总", notes = "获取包装记录结果报表-汇总", hidden = true)
+	@RequestMapping(value = "/getPackRecordSumReport", method = RequestMethod.GET)
+	@ResponseBody
+	public ApiResponseResult getPackRecordSumReport(String taskNo,String batNo,String begTime,String endTime) {
+		try {
+			Sort sort = Sort.unsorted();
+			ApiResponseResult result = lytReportService.getPackRecordSumReport(taskNo,batNo,begTime,endTime,super.getPageRequest(sort));
+			logger.debug("获取包装记录结果报表-汇总=getPackRecordSumReport:" + result);
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("获取包装记录结果报表-汇总失败！", e);
+			return ApiResponseResult.failure("获取包装记录结果报表失败！");
+		}
+	}
+	@ApiOperation(value = "获取包装记录结果-详细报表", notes = "获取包装记录结果-详细报表", hidden = true)
+	@RequestMapping(value = "/getPackRecordReport", method = RequestMethod.GET)
+	@ResponseBody
+	public ApiResponseResult getPackRecordReport(String taskNo,String batNo,String begTime,String endTime) {
+		try {
+			Sort sort = Sort.unsorted();
+			ApiResponseResult result = lytReportService.getPackRecordReport(taskNo,batNo,begTime,endTime,super.getPageRequest(sort));
+			logger.debug("获取包装记录结果-详细报表=getPackRecordReport:" + result);
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("获取包装记录-详细结果报表失败！", e);
+			return ApiResponseResult.failure("获取包装记录-详细结果报表失败！");
+		}
+	}
+	
+	@ApiOperation(value = "导出包装记录-详细结果报表", notes = "导出包装记录-详细结果报表", hidden = true)
+	@RequestMapping(value = "/getPackRecordExport", method = RequestMethod.GET)
+	@ResponseBody
+	public void getPackRecordExport(HttpServletResponse response,String taskNo,String batNo,String begTime,String endTime) {
+		try {
+			lytReportService.getPackRecordExport(response,taskNo,batNo,begTime,endTime);
+			logger.debug("导出电包装记录-详细结果报表=getPackRecordExport:");
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("导出包装记录-详细结果报表失败！", e);
+		}
+	}
+	@ApiOperation(value = "导出包装记录-汇总结果报表", notes = "导出包装记录-汇总结果报表", hidden = true)
+	@RequestMapping(value = "/getPackRecordSumExport", method = RequestMethod.GET)
+	@ResponseBody
+	public void getPackRecordSumExport(HttpServletResponse response,String taskNo,String batNo,String begTime,String endTime) {
+		try {
+			lytReportService.getPackRecordSumExport(response,taskNo,batNo,begTime,endTime);
+			logger.debug("导出电包装记录-汇总结果报表=getPackRecordSumExport:");
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("导出包装记录-汇总结果报表失败！", e);
 		}
 	}
 }

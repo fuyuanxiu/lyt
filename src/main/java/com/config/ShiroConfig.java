@@ -124,6 +124,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/glue/*", "anon");
         filterChainDefinitionMap.put("/glueinput/*", "anon");
         filterChainDefinitionMap.put("/queryAppVersion", "anon");
+        filterChainDefinitionMap.put("/create_pulp/*", "anon");
 
 
         filterChainDefinitionMap.put("/wd_rf/login1", "anon");

@@ -256,4 +256,56 @@ public class LytReportlmpl extends ReportPrcUtils implements LytReportService {
 				proc, begTime,endTime, dataType);
 		Export3(response,list.get(2),list.get(3));
 	}
+	
+	/**
+	 * 获取包装记录结果（决策报表）- 详细
+	 **/
+	public ApiResponseResult getPackRecordReport(String taskNo, String batNo, String begTime, String endTime,
+			PageRequest pageRequest) throws Exception {
+		List<Object> list = getReportPrc("PRC_APP_PACKING_RESULT", UserUtil.getSessionUser().getFcompany() + "",
+				UserUtil.getSessionUser().getFfactory() + "", taskNo, batNo, begTime, endTime,
+				pageRequest.getPageSize(), pageRequest.getPageNumber());
+		if (!list.get(0).toString().equals("0")) {// 存储过程调用失败 //判断返回游标
+			return ApiResponseResult.failure(list.get(1).toString());
+		}
+			Map map = new HashMap();
+			map.put("total", list.get(2));
+			map.put("rows", list.get(3));
+			return ApiResponseResult.success().data(map);				
+	}
+	
+	/**
+	 * 获取包装记录结果（决策报表）- 汇总
+	 **/
+	public ApiResponseResult getPackRecordSumReport(String taskNo, String batNo, String begTime, String endTime,
+			PageRequest pageRequest) throws Exception {
+		List<Object> list = getReportPrc("PRC_APP_PACKING_RESULT_SUM", UserUtil.getSessionUser().getFcompany() + "",
+				UserUtil.getSessionUser().getFfactory() + "", taskNo, batNo, begTime, endTime,
+				pageRequest.getPageSize(), pageRequest.getPageNumber());
+		if (!list.get(0).toString().equals("0")) {// 存储过程调用失败 //判断返回游标
+			return ApiResponseResult.failure(list.get(1).toString());
+		}
+			Map map = new HashMap();
+			map.put("total", list.get(2));
+			map.put("rows", list.get(3));
+			return ApiResponseResult.success().data(map);				
+	}
+	/**
+	 * 包装记录结果（决策报表）-明细
+	 * **/
+	public void getPackRecordExport(HttpServletResponse response,String taskNo,String batNo,String begTime,String endTime)throws Exception{
+		List<Object> list = getReportPrc("PRC_APP_PACKING_RESULT", UserUtil.getSessionUser().getFcompany() + "",
+				UserUtil.getSessionUser().getFfactory() + "", taskNo, batNo, begTime, endTime,
+				1000000, 0);//上限100万条数据
+		Export3(response,list.get(3),list.get(4));
+	}
+	/**
+	 * 包装记录结果（决策报表）- 汇总
+	 * **/
+	public void getPackRecordSumExport(HttpServletResponse response,String taskNo,String batNo,String begTime,String endTime)throws Exception{
+		List<Object> list = getReportPrc("PRC_APP_PACKING_RESULT_SUM", UserUtil.getSessionUser().getFcompany() + "",
+				UserUtil.getSessionUser().getFfactory() + "", taskNo, batNo, begTime, endTime,
+				1000000, 0);//上限100万条数据
+		Export3(response,list.get(3),list.get(4));
+	}
 }

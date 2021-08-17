@@ -56,4 +56,13 @@ public interface LytReportService {
 	//导出-生产日报-按工单
 	public void getProdDailyByTaskExport(HttpServletResponse response,String proc,String begTime,String endTime, Integer dataType)throws Exception;
 	
+	//包装记录结果（决策报表）
+	public ApiResponseResult getPackRecordReport(String taskNo,String batNo,String begTime,String endTime,PageRequest pageRequest)throws Exception;
+	//导出包装记录结果（决策报表）
+	public void getPackRecordExport(HttpServletResponse response,String taskNo,String batNo,String begTime,String endTime)throws Exception;
+	//包装记录结果（决策报表）- 汇总
+	public ApiResponseResult getPackRecordSumReport(String taskNo,String batNo,String begTime,String endTime,PageRequest pageRequest)throws Exception;
+	//导出包装记录结果（决策报表）- 汇总
+	public void getPackRecordSumExport(HttpServletResponse response,String taskNo,String batNo,String begTime,String endTime)throws Exception;
+	
 }

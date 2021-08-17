@@ -44,7 +44,8 @@ public class GlueImpl implements GlueService {
         }
 
         //获取数据
-        List<Object> delList = getDelListRf("10000", "1000", device, "App_Zhijiao_Shebei_Enter");
+        //List<Object> delList = getDelListRf("10000", "1000", device, "App_Zhijiao_Shebei_Enter");
+    	List<Object> delList = getDelListRf("10000", "1000", device, "App_Zhijiao_Shebei_Select");//2021-5-15add
         String s2 = delList.get(0).toString();//resultList.get(0).substring(0);
         String[] delStrs = s2.split("\\[");
         if(delStrs.length < 1){
@@ -58,6 +59,7 @@ public class GlueImpl implements GlueService {
         //封装数据
         Map<String, Object> map = new HashMap<>();
         map.put("list", delList.get(1));
+        map.put("station", delStrs[1]);//2021-5-15 add
 
         return ApiResponseResult.success("获取数据成功！").data(map);
     }
